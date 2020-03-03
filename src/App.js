@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import "rbx/index.css";
-import "./App.css";
-import firebase from "firebase/app";
-import "firebase/database";
-import ListPage from "./ListPage";
-import Banner from "./Banner";
-import { db, createUser } from "./firebaseHelpers";
-import { Block } from "rbx";
+import React, { useState, useEffect } from 'react';
+import 'rbx/index.css';
+import './App.css';
+import firebase from 'firebase/app';
+//import "firebase/database";
+import ListPage from './ListPage';
+import Banner from './Banner';
+import { db, createUser } from './firebaseHelpers';
+import { Block } from 'rbx';
 
 const createItemList = (dbData, house) => {
   let items = dbData.houses[house].items;
@@ -30,7 +30,7 @@ function App() {
           if (snap.val().houses[house] !== undefined) {
             setItems(createItemList(snap.val(), house));
           } else {
-            alert("wrong house name");
+            alert('wrong house name');
             setHouse(undefined);
           }
         } else {
@@ -38,9 +38,9 @@ function App() {
         }
       }
     };
-    db.on("value", handleData, error => alert(error));
+    db.on('value', handleData, error => alert(error));
     return () => {
-      db.off("value", handleData);
+      db.off('value', handleData);
     };
   }, [house, user]);
 
@@ -60,9 +60,15 @@ function App() {
   }, [usersData, user]);
 
   return (
-    <div className="App">
-      <Banner user={user} house={house} setHouse={setHouse} housesData={housesData} usersData={usersData}/>
-      <Block/>
+    <div className='App'>
+      <Banner
+        user={user}
+        house={house}
+        setHouse={setHouse}
+        housesData={housesData}
+        usersData={usersData}
+      />
+      <Block />
       <ListPage propItems={items} user={user} house={house} />
     </div>
   );
