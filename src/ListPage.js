@@ -7,7 +7,6 @@ import {
   Block,
   Field,
   Control,
-  Heading,
   Divider
 } from "rbx";
 import { ColumnGroup } from "rbx/grid/columns/column-group";
@@ -15,8 +14,8 @@ import ItemList from "./ItemList";
 import { saveItem } from "./firebaseHelpers";
 import ReceiptModal from "./ReceiptModal";
 import ShoppingTrips from "./Components/ShoppingTrips";
-import WelcomeScreen from "./Components/WelcomeScreen"
-import SignInScreen from './Components/SignInScreen'
+import WelcomeScreen from "./Components/WelcomeScreen";
+import SignInScreen from "./Components/SignInScreen";
 
 const useSelection = () => {
   const [selected, setSelected] = useState([]);
@@ -112,11 +111,9 @@ const ListPage = ({ propItems, user, house }) => {
       </Container>
     );
   } else if (user) {
-    return (
-      <SignInScreen user={user}/>
-    );
+    return <SignInScreen user={user} />;
   } else {
-    return <WelcomeScreen/>;
+    return <WelcomeScreen />;
   }
 };
 
