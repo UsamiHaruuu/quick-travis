@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import ListPage from './ListPage';
 
-test('ListPage should update product name on change', () => {
+test('ListPage should be updated on change', () => {
     const testFn = jest.fn();
     const propItems = [];
     const user = { a: 1 };
@@ -11,14 +11,14 @@ test('ListPage should update product name on change', () => {
     const { getByTestId } = render(
         <ListPage propItems={propItems} user={user} house={house} testFn={testFn} />
     );
-    const productInput = getByTestId('product-input');
+    const productInput = getByTestId('product-unit-test');
     fireEvent.change(productInput, {
-        target: { value: 'hello' },
+        target: { value: 'triggered' },
     });
-    expect(testFn).toBeCalledWith('hello');
+    expect(testFn).toBeCalledWith('triggered');
     fireEvent.change(productInput, {
-        target: { value: 'goodbye' },
+        target: { value: 'finished' },
     });
-    expect(testFn).toBeCalledWith('goodbye');
+    expect(testFn).toBeCalledWith('finished');
     expect(testFn).toHaveBeenCalledTimes(2);
 })  

@@ -39,11 +39,11 @@ const ListPage = ({ propItems, user, house, testFn }) => {
 
   const handleProductChange = event => {
     setProductName(event.target.value);
-    testFn(event.target.value);
   };
 
   const handleUnitChange = event => {
     setUnit(event.target.value);
+    testFn(event.target.value);
   };
 
   const handleSubmit = () => {
@@ -85,7 +85,6 @@ const ListPage = ({ propItems, user, house, testFn }) => {
                     placeholder="Eggs"
                     value={productName}
                     onChange={handleProductChange}
-                    data-testid="product-input"
                   />
                 </Control>
                 <Control expanded>
@@ -94,6 +93,7 @@ const ListPage = ({ propItems, user, house, testFn }) => {
                     placeholder="dozen"
                     value={unit}
                     onChange={handleUnitChange}
+                    data-testid="product-unit-test"
                   />
                 </Control>
                 <Control>
