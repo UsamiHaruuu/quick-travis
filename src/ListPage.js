@@ -9,13 +9,12 @@ import {
   Control,
   Divider
 } from "rbx";
-import { ColumnGroup } from "rbx/grid/columns/column-group";
 import ItemList from "./ItemList";
 import { saveItem } from "./firebaseHelpers";
 import ReceiptModal from "./ReceiptModal";
 import ShoppingTrips from "./Components/ShoppingTrips";
-import WelcomeScreen from "./Components/WelcomeScreen";
-import SignInScreen from "./Components/SignInScreen";
+import WelcomeScreen from "./Components/WelcomeScreen"
+import SignInScreen from './Components/SignInScreen'
 
 const useSelection = () => {
   const [selected, setSelected] = useState([]);
@@ -32,7 +31,7 @@ const useSelection = () => {
   return [selected, clearSelected, toggle];
 };
 
-const ListPage = ({ propItems, user, house }) => {
+const ListPage = ({ propItems, user, house, testFn }) => {
   const [productName, setProductName] = useState("");
   const [unit, setUnit] = useState("");
   const [selected, clearSelected, toggle] = useSelection();
@@ -40,6 +39,7 @@ const ListPage = ({ propItems, user, house }) => {
 
   const handleProductChange = event => {
     setProductName(event.target.value);
+    testFn(event.target.value);
   };
 
   const handleUnitChange = event => {
@@ -60,7 +60,7 @@ const ListPage = ({ propItems, user, house }) => {
           modalState={{ attachReceipt, setAttachReceipt }}
           house={house}
         />
-        <ColumnGroup>
+        <Column.Group>
           <Column size={10} offset={1}>
             <Block />
             <ItemList
@@ -85,6 +85,7 @@ const ListPage = ({ propItems, user, house }) => {
                     placeholder="Eggs"
                     value={productName}
                     onChange={handleProductChange}
+                    data-testid="product-input"
                   />
                 </Control>
                 <Control expanded>
@@ -103,7 +104,7 @@ const ListPage = ({ propItems, user, house }) => {
               </Field>
             </Column>
           </Column>
-        </ColumnGroup>
+        </Column.Group>
         <Block />
         <Divider color="info">Shopping Trips</Divider>
         <Block />
@@ -111,9 +112,11 @@ const ListPage = ({ propItems, user, house }) => {
       </Container>
     );
   } else if (user) {
-    return <SignInScreen user={user} />;
+    return (
+      <SignInScreen user={user}/>
+    );
   } else {
-    return <WelcomeScreen />;
+    return <WelcomeScreen/>;
   }
 };
 
