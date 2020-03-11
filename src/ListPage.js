@@ -97,7 +97,7 @@ const ListPage = ({ propItems, user, house, testFn }) => {
                   />
                 </Control>
                 <Control>
-                  <Button size="medium" color="link" onClick={handleSubmit}>
+                  <Button   size="medium" color="link" onClick={handleSubmit}>
                     Add
                   </Button>
                 </Control>

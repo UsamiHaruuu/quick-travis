@@ -9,34 +9,36 @@ const getDate = (timeStamp) => {
 
 const ShoppingTrip = ({receipt, modalState}) => {
   return (
-    <Modal active={modalState.active}>
-      <Modal.Background onClick={() => modalState.setActive(false)}/>
-      <Modal.Card>
-        <Modal.Card.Head>
-          <Modal.Card.Title>{getDate(receipt.timeStamp)}</Modal.Card.Title>
-          <Delete onClick={() => modalState.setActive(false)}/>
-        </Modal.Card.Head>
-        <Modal.Card.Body>
-          <Container>
-            {receipt.items.map(item => 
-              <Notification key={item.productName}>
-                <b>{item.productName} ({item.unit})</b> for
-                <Block/>
-                {item.neededBy.map(p => `${p.name} (bought ${p.quantity})`).join(', ')}
-              </Notification>
-            )}
-            {
-              receipt.url !== "n/a" ?
-              <Image.Container size='3by5'>
-                <Image src={receipt.url} alt="No Receipt" />
-              </Image.Container>
-              : <Heading>No receipt uploaded</Heading>
-            }
-          </Container>
-        </Modal.Card.Body>
-        <Modal.Card.Foot />
-      </Modal.Card>
-    </Modal>
+    <div>
+      <Modal active={modalState.active} data-cy='shopping-trip'>
+        <Modal.Background onClick={() => modalState.setActive(false)} />
+        <Modal.Card>
+          <Modal.Card.Head>
+            <Modal.Card.Title>{getDate(receipt.timeStamp)}</Modal.Card.Title>
+            <Delete onClick={() => modalState.setActive(false)} />
+          </Modal.Card.Head>
+          <Modal.Card.Body>
+            <Container>
+              {receipt.items.map(item =>
+                <Notification key={item.productName}>
+                  <b>{item.productName} ({item.unit})</b> for
+                <Block />
+                  {item.neededBy.map(p => `${p.name} (bought ${p.quantity})`).join(', ')}
+                </Notification>
+              )}
+              {
+                receipt.url !== "n/a" ?
+                  <Image.Container size='3by5'>
+                    <Image src={receipt.url} alt="No Receipt" />
+                  </Image.Container>
+                  : <Heading>No receipt uploaded</Heading>
+              }
+            </Container>
+          </Modal.Card.Body>
+          <Modal.Card.Foot />
+        </Modal.Card>
+      </Modal>
+    </div>
   )
 }
 
@@ -90,7 +92,9 @@ const ShoppingTrips = ({house}) => {
               <Card>
               <Card.Header>
                 <Card.Header.Title>
+                      <div >
                 <Button fullwidth
+                          data-cy="add-button"
                 key={r.timeStamp} 
                 color='info'
                 onClick={() => {receiptClick(r);      
@@ -99,6 +103,7 @@ const ShoppingTrips = ({house}) => {
               >
                 {getDate(r.timeStamp) }
               </Button>
+              </div>
 
                 </Card.Header.Title>
               </Card.Header>

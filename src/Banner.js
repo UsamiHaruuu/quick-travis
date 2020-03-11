@@ -13,32 +13,34 @@ import HouseOptions from './HouseOptions';
 
 const Banner = ({ user, house, setHouse, housesData, usersData }) => {
   return (
-    <Navbar color='info'>
-      <Navbar.Brand>
-        <Navbar.Item as="div">
-          <Content className='medium-font'>
-            {!user ? "OneHouse" : user.displayName}
-          </Content>
-        </Navbar.Item>
-        <Navbar.Burger />
-      </Navbar.Brand>
-      <Navbar.Menu>
-        <Navbar.Segment align="start">
+    <div data-cy='banner'>
+      <Navbar color='info'>
+        <Navbar.Brand>
           <Navbar.Item as="div">
-            <Content>{house ? house : ""}</Content>
+            <Content className='medium-font'>
+              {!user ? "OneHouse" : user.displayName}
+            </Content>
           </Navbar.Item>
-        </Navbar.Segment>
-        <Navbar.Segment align="end">
-          <Navbar.Item as="div">
-            <HouseOptions house={house} setHouse={setHouse} user={user} housesData={housesData} usersData={usersData}/>
-          </Navbar.Item>
-          <Navbar.Item as="div">
-            {!user ? <SignIn/> :
-            <Logout user={user} house={house}/>}
-          </Navbar.Item>
-        </Navbar.Segment>
-      </Navbar.Menu>
-    </Navbar>
+          <Navbar.Burger />
+        </Navbar.Brand>
+        <Navbar.Menu>
+          <Navbar.Segment align="start">
+            <Navbar.Item as="div">
+              <Content>{house ? house : ""}</Content>
+            </Navbar.Item>
+          </Navbar.Segment>
+          <Navbar.Segment align="end">
+            <Navbar.Item as="div">
+              <HouseOptions house={house} setHouse={setHouse} user={user} housesData={housesData} usersData={usersData} />
+            </Navbar.Item>
+            <Navbar.Item as="div">
+              {!user ? <SignIn /> :
+                <Logout user={user} house={house} />}
+            </Navbar.Item>
+          </Navbar.Segment>
+        </Navbar.Menu>
+      </Navbar>
+    </div>
   );
 };
 
@@ -52,17 +54,18 @@ const uiConfig = {
 
 const Logout = ({ user, house }) => {
   return (
-    <Button
+    <div >    <Button
+      data-cy='log-out'
       color="primary"
       onClick={() => firebase.auth().signOut()}
     >
       Log out
-    </Button>
+    </Button></div>
   );
 };
 
 const SignIn = () => (
-  <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+  <div data-cy='sign-in'><StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} /></div>
 );
 
 export default Banner;
