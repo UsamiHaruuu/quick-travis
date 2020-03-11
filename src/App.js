@@ -61,15 +61,19 @@ function App() {
 
   return (
     <div className='App'>
-      <Banner
-        user={user}
-        house={house}
-        setHouse={setHouse}
-        housesData={housesData}
-        usersData={usersData}
-      />
+    <div data-cy='banner'>
+        <Banner
+          user={user}
+          house={house}
+          setHouse={setHouse}
+          housesData={housesData}
+          usersData={usersData}
+        />
+    </div>
       <Block />
-      <ListPage propItems={items} user={user} house={house} />
+      <div data-cy='list-page'>
+        <ListPage propItems={items} user={user} house={house} />
+      </div>
     </div>
   );
 }
