@@ -17,9 +17,9 @@ describe('Test App', () => {
     cy.visit('/');
     cy.get('[data-cy=sign-in]').should('contain', 'Sign in with Google');
   });
-  // it('shows shopping trip', () => {
-  //   cy.visit('/');
-  //   cy.get('[data-cy=add-button]').click();
-  //   cy.get('[data-cy=shopping-trip]').should('be.visible');
-  // });
+  it('shows shopping trip', () => {
+    cy.visit('/');
+    cy.get('[data-cy=add-button]').click();
+    cy.get('[data-cy=shopping-trip]').should('be.visible');
+  });
 });
